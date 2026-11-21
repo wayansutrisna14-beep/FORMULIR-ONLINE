@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulir Online Terpadu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root, [data-theme="ocean"] {
+      --bg-start: #f0f8ff; --bg-mid: #e8f4fd; --bg-end: #e0f2fe;
+      --orb-1: rgba(56, 189, 248, 0.24); --orb-2: rgba(2, 132, 199, 0.16); --orb-3: rgba(125, 211, 252, 0.28);
+      --pattern-color: rgba(2, 132, 199, 0.08);
+      --accent: #0284c7; --accent-hover: #0369a1; --accent-soft: rgba(2, 132, 199, 0.11);
+      --accent-border: rgba(2, 132, 199, 0.25); --accent-text: #0369a1;
+      --glass-bg: rgba(255, 255, 255, 0.74); --glass-bg-strong: rgba(255, 255, 255, 0.88);
+      --glass-border: rgba(255, 255, 255, 0.85); --card-border: rgba(186, 230, 253, 0.65);
+      --card-shadow: 0 10px 30px -10px rgba(2, 132, 199, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+      --card-shadow-hover: 0 20px 40px -12px rgba(2, 132, 199, 0.2), 0 8px 16px -4px rgba(15, 23, 42, 0.06);
+      --text-primary: #0f172a; --text-secondary: #475569; --text-muted: #64748b;
+      --input-bg: rgba(255, 255, 255, 0.85); --input-border: rgba(148, 163, 184, 0.35);
+      --pill-bg: rgba(255, 255, 255, 0.68); --pill-hover: rgba(255, 255, 255, 0.95);
+      --modal-bg: rgba(255, 255, 255, 0.96);
+    }
+    [data-theme="sage"] {
+      --bg-start: #f2f9f6; --bg-mid: #e6f6ef; --bg-end: #d1fae5;
+      --orb-1: rgba(45, 212, 191, 0.22); --orb-2: rgba(13, 148, 136, 0.15); --orb-3: rgba(110, 231, 183, 0.26);
+      --pattern-color: rgba(13, 148, 136, 0.08);
+      --accent: #0d9488; --accent-hover: #0f766e; --accent-soft: rgba(13, 148, 136, 0.11);
+      --accent-border: rgba(13, 148, 136, 0.26); --accent-text: #0f766e;
+      --glass-bg: rgba(255, 255, 255, 0.74); --glass-bg-strong: rgba(255, 255, 255, 0.88);
+      --glass-border: rgba(255, 255, 255, 0.85); --card-border: rgba(167, 243, 208, 0.7);
+      --card-shadow: 0 10px 30px -10px rgba(13, 148, 136, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+      --card-shadow-hover: 0 20px 40px -12px rgba(13, 148, 136, 0.2), 0 8px 16px -4px rgba(15, 23, 42, 0.06);
+      --text-primary: #0f172a; --text-secondary: #3f524d; --text-muted: #5c706a;
+      --input-bg: rgba(255, 255, 255, 0.85); --input-border: rgba(148, 163, 184, 0.35);
+      --pill-bg: rgba(255, 255, 255, 0.68); --pill-hover: rgba(255, 255, 255, 0.95);
+      --modal-bg: rgba(255, 255, 255, 0.96);
+    }
+    [data-theme="arctic"] {
+      --bg-start: #f4f6fa; --bg-mid: #edf1f7; --bg-end: #e2e8f0;
+      --orb-1: rgba(96, 165, 250, 0.2); --orb-2: rgba(59, 130, 246, 0.14); --orb-3: rgba(148, 163, 184, 0.24);
+      --pattern-color: rgba(59, 130, 246, 0.075);
+      --accent: #3b82f6; --accent-hover: #2563eb; --accent-soft: rgba(59, 130, 246, 0.11);
+      --accent-border: rgba(59, 130, 246, 0.25); --accent-text: #1d4ed8;
+      --glass-bg: rgba(255, 255, 255, 0.76); --glass-bg-strong: rgba(255, 255, 255, 0.9);
+      --glass-border: rgba(255, 255, 255, 0.9); --card-border: rgba(203, 213, 225, 0.75);
+      --card-shadow: 0 10px 30px -10px rgba(51, 65, 85, 0.1), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+      --card-shadow-hover: 0 20px 40px -12px rgba(59, 130, 246, 0.18), 0 8px 16px -4px rgba(15, 23, 42, 0.06);
+      --text-primary: #0f172a; --text-secondary: #475569; --text-muted: #64748b;
+      --input-bg: rgba(255, 255, 255, 0.88); --input-border: rgba(148, 163, 184, 0.38);
+      --pill-bg: rgba(255, 255, 255, 0.72); --pill-hover: rgba(255, 255, 255, 0.96);
+      --modal-bg: rgba(255, 255, 255, 0.97);
+    }
+    [data-theme="lavender"] {
+      --bg-start: #f6f5ff; --bg-mid: #f0eeff; --bg-end: #ede9fe;
+      --orb-1: rgba(129, 140, 248, 0.23); --orb-2: rgba(99, 102, 241, 0.15); --orb-3: rgba(196, 181, 253, 0.28);
+      --pattern-color: rgba(99, 102, 241, 0.08);
+      --accent: #6366f1; --accent-hover: #4f46e5; --accent-soft: rgba(99, 102, 241, 0.11);
+      --accent-border: rgba(99, 102, 241, 0.25); --accent-text: #4338ca;
+      --glass-bg: rgba(255, 255, 255, 0.75); --glass-bg-strong: rgba(255, 255, 255, 0.89);
+      --glass-border: rgba(255, 255, 255, 0.85); --card-border: rgba(221, 214, 254, 0.75);
+      --card-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+      --card-shadow-hover: 0 20px 40px -12px rgba(99, 102, 241, 0.2), 0 8px 16px -4px rgba(15, 23, 42, 0.06);
+      --text-primary: #1e1b4b; --text-secondary: #475569; --text-muted: #64748b;
+      --input-bg: rgba(255, 255, 255, 0.86); --input-border: rgba(165, 180, 252, 0.42);
+      --pill-bg: rgba(255, 255, 255, 0.7); --pill-hover: rgba(255, 255, 255, 0.96);
+      --modal-bg: rgba(255, 255, 255, 0.96);
+    }
+    [data-theme="nordic"] {
+      --bg-start: #0f172a; --bg-mid: #131f38; --bg-end: #1e293b;
+      --orb-1: rgba(56, 189, 248, 0.16); --orb-2: rgba(14, 165, 233, 0.12); --orb-3: rgba(99, 102, 241, 0.14);
+      --pattern-color: rgba(56, 189, 248, 0.08);
+      --accent: #38bdf8; --accent-hover: #0ea5e9; --accent-soft: rgba(56, 189, 248, 0.15);
+      --accent-border: rgba(56, 189, 248, 0.32); --accent-text: #7dd3fc;
+      --glass-bg: rgba(30, 41, 59, 0.68); --glass-bg-strong: rgba(30, 41, 59, 0.85);
+      --glass-border: rgba(148, 163, 184, 0.18); --card-border: rgba(56, 189, 248, 0.18);
+      --card-shadow: 0 12px 32px -10px rgba(2, 6, 23, 0.55), 0 4px 12px -2px rgba(2, 6, 23, 0.3);
+      --card-shadow-hover: 0 22px 44px -12px rgba(2, 6, 23, 0.75), 0 0 24px -4px rgba(56, 189, 248, 0.18);
+      --text-primary: #f1f5f9; --text-secondary: #cbd5e1; --text-muted: #94a3b8;
+      --input-bg: rgba(15, 23, 42, 0.65); --input-border: rgba(148, 163, 184, 0.25);
+      --pill-bg: rgba(30, 41, 59, 0.65); --pill-hover: rgba(51, 65, 85, 0.85);
+      --modal-bg: rgba(15, 23, 42, 0.96);
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-mid) 50%, var(--bg-end) 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .bg-layer { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+    .bg-orb { position: absolute; border-radius: 9999px; filter: blur(80px); }
+    .bg-orb-1 { width: 480px; height: 480px; top: -120px; left: -100px; background: var(--orb-1); }
+    .bg-orb-2 { width: 540px; height: 540px; bottom: -160px; right: -120px; background: var(--orb-2); }
+    .bg-orb-3 { width: 360px; height: 360px; top: 38%; left: 48%; transform: translate(-50%, -50%); background: var(--orb-3); }
+    .bg-dots { position: absolute; inset: 0; background-image: radial-gradient(var(--pattern-color) 1.5px, transparent 1.5px); background-size: 24px 24px; opacity: 0; }
+    [data-texture="dots"] .bg-dots { opacity: 1; }
+    .bg-waves { position: absolute; inset: 0; opacity: 0; color: var(--pattern-color); }
+    [data-texture="waves"] .bg-waves { opacity: 1; }
+    .glass-header { background: var(--glass-bg-strong); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
+    .glass-panel { background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); box-shadow: var(--card-shadow); border-radius: 18px; }
+    .form-card { background: var(--glass-bg); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid var(--card-border); box-shadow: var(--card-shadow); border-radius: 20px; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .form-card:hover { transform: translateY(-4px); box-shadow: var(--card-shadow-hover); border-color: var(--accent-border); }
+    .btn-accent { background: var(--accent); color: #ffffff; transition: all 0.2s ease; }
+    .btn-accent:hover { background: var(--accent-hover); }
+    [data-theme="nordic"] .btn-accent { color: #0f172a; font-weight: 600; }
+    .btn-soft { background: var(--accent-soft); color: var(--accent-text); border: 1px solid var(--accent-border); transition: all 0.2s ease; }
+    .btn-soft:hover { background: var(--accent); color: #ffffff; }
+    [data-theme="nordic"] .btn-soft:hover { color: #0f172a; }
+    .theme-input { background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-primary); }
+    .theme-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+    .category-pill { background: var(--pill-bg); border: 1px solid var(--card-border); color: var(--text-secondary); transition: all 0.2s ease; }
+    .category-pill:hover { background: var(--pill-hover); color: var(--text-primary); }
+    .category-pill.active { background: var(--accent); border-color: var(--accent); color: #ffffff; }
+    [data-theme="nordic"] .category-pill.active { color: #0f172a; }
+  </style>
+</head>
+<body data-theme="ocean" data-texture="mesh" class="antialiased">
+  <div class="bg-layer" aria-hidden="true">
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+    <div class="bg-dots"></div>
+    <svg class="bg-waves w-full h-full" viewBox="0 0 1440 900" preserveAspectRatio="none" fill="none">
+      <path d="M-80 220 C 320 80, 680 380, 1520 180 L 1520 920 L -80 920 Z" fill="currentColor" opacity="0.55"/>
+      <path d="M-80 480 C 440 620, 960 280, 1520 520 L 1520 920 L -80 920 Z" fill="currentColor" opacity="0.45"/>
+      <path d="M-80 700 C 520 560, 1040 820, 1520 660 L 1520 920 L -80 920 Z" fill="currentColor" opacity="0.35"/>
+    </svg>
+  </div>
+
+  <header class="glass-header sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div class="flex items-start sm:items-center gap-3.5 sm:gap-4">
+        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center shrink-0 shadow-md" style="background: var(--accent); color: #fff;">
+          <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <circle cx="8.5" cy="13" r="1" fill="currentColor"></circle>
+            <line x1="12" y1="13" x2="16" y2="13"></line>
+            <circle cx="8.5" cy="17" r="1" fill="currentColor"></circle>
+            <line x1="12" y1="17" x2="16" y2="17"></line>
+          </svg>
+        </div>
+        <div>
+          <h1 class="font-display text-xl sm:text-2xl font-extrabold tracking-tight" style="color: var(--text-primary);">Formulir Online Terpadu</h1>
+          <p class="text-xs sm:text-sm mt-0.5 max-w-2xl" style="color: var(--text-secondary);">Kumpulan formulir online terpadu untuk kemudahan administrasi, pendaftaran, dan pelaporan.</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 px-3 py-2 rounded-2xl border self-start sm:self-auto" style="background: var(--pill-bg); border-color: var(--card-border);">
+        <span class="text-xs font-medium" style="color: var(--text-muted);">Tema:</span>
+        <div id="theme-swatches" class="flex items-center gap-1.5"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+    <section class="glass-panel p-4 sm:p-5 mb-6">
+      <div class="flex flex-col md:flex-row gap-3.5 items-stretch md:items-center justify-between">
+        <div class="relative flex-1">
+          <input id="search-input" type="text" placeholder="Cari judul formulir, deskripsi, atau kategori..." class="theme-input w-full pl-4 pr-10 py-2.5 rounded-xl text-sm" />
+          <button id="btn-clear-search" type="button" class="hidden absolute inset-y-0 right-2.5 my-auto w-7 h-7 rounded-lg items-center justify-center" style="color: var(--text-muted);">✕</button>
+        </div>
+        <div class="flex items-center gap-2">
+          <label for="sort-select" class="text-xs font-medium" style="color: var(--text-muted);">Urutkan:</label>
+          <select id="sort-select" class="theme-input px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium cursor-pointer">
+            <option value="pinned">Tersemat & Terbaru</option>
+            <option value="az">Abjad (A–Z)</option>
+          </select>
+        </div>
+      </div>
+      <div class="mt-4 pt-4 border-t flex flex-col sm:flex-row sm:items-center justify-between gap-3" style="border-color: var(--card-border);">
+        <div id="category-pills" class="flex flex-wrap items-center gap-2"></div>
+        <p id="results-counter" class="text-xs font-medium" style="color: var(--text-muted);"></p>
+      </div>
+    </section>
+
+    <section>
+      <div id="forms-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6"></div>
+      <div id="empty-state" class="hidden glass-panel p-12 text-center max-w-lg mx-auto my-8">
+        <div class="text-3xl mb-3">🔍</div>
+        <h3 class="font-display text-lg font-bold mb-1">Formulir Tidak Ditemukan</h3>
+        <p class="text-sm mb-4" style="color: var(--text-secondary);">Coba ubah kata kunci pencarian atau pilih kategori lainnya.</p>
+        <button id="btn-reset-filter" type="button" class="px-5 py-2.5 rounded-xl text-sm font-semibold btn-accent">Tampilkan Semua</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="preview-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
+    <div class="w-full max-w-4xl h-[86vh] flex flex-col rounded-3xl border shadow-2xl overflow-hidden" style="background: var(--modal-bg); border-color: var(--card-border);">
+      <div class="px-5 py-3.5 border-b flex items-center justify-between gap-2" style="border-color: var(--card-border);">
+        <h3 id="preview-title" class="font-display text-sm sm:text-base font-bold truncate">Pratinjau Formulir</h3>
+        <div class="flex items-center gap-2">
+          <a id="btn-preview-external" href="#" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl text-xs font-semibold btn-accent">Buka Tab Baru ↗</a>
+          <button id="btn-close-preview" type="button" class="w-8 h-8 rounded-xl flex items-center justify-center" style="color: var(--text-muted);">✕</button>
+        </div>
+      </div>
+      <iframe id="preview-iframe" title="Pratinjau Google Form" class="w-full flex-1 border-0 bg-white" src="about:blank"></iframe>
+    </div>
+  </div>
+
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <script>
+    (function() {
+      const DATA = {"portalTitle":"Formulir Online Terpadu","portalSubtitle":"Kumpulan formulir online terpadu untuk kemudahan administrasi, pendaftaran, dan pelaporan.","theme":"ocean","texture":"mesh","forms":[{"id":"form-1795252488945","icon":"📋","title":"Hasil Pemeriksaan Uji Emisi","url":"https://docs.google.com/spreadsheets/d/1MbyQ5VVnY3MdCgAnxKti7wPhdiv5R_bhTgpL8Bb02Bw/edit?gid=2121856774#gid=2121856774","category":"Hasil Pemeriksaan","description":"Hasil uji emisi kendaraan","status":"Aktif","duration":"± 30 menit","pinned":false},{"id":"form-1795252432490","icon":"📋","title":"e-EMISI","url":"https://forms.gle/sWbdR7Cq17yR4zCN9","category":"Pendaftaran","description":"Formulir uji emisi kendaraan","status":"Aktif","duration":"± 15 menit","pinned":true},{"id":"form-1795252376682","icon":"📑","title":"BAP e-SCRAPING","url":"https://docs.google.com/spreadsheets/d/1MyAUNpPpNMGxCqCVCAH26OPNJevGQ9Z_RJjq8I1J4t0/edit?gid=671476345#gid=671476345","category":"Hasil Pemeriksaan","description":"BAP hasil pemeriksaan siap cetak","status":"Aktif","duration":"± 30 menit","pinned":false},{"id":"form-1795252192756","icon":"📋","title":"e-SCRAPING","url":"https://docs.google.com/forms/d/e/1FAIpQLSfOrqU8tashfAby75wtSqhUm3Sb9k02c5vv5tLPu0v9_E8DaA/viewform","category":"Pendaftaran","description":"Formulir penilaian penghapusan kendaraan dinas","status":"Aktif","duration":"± 15 menit","pinned":true}]};
+      const THEMES = [
+        { id: 'ocean', name: 'Ocean Breeze', swatch: '#0284c7' },
+        { id: 'sage', name: 'Sage Mist', swatch: '#0d9488' },
+        { id: 'arctic', name: 'Arctic Slate', swatch: '#3b82f6' },
+        { id: 'lavender', name: 'Lavender Dusk', swatch: '#6366f1' },
+        { id: 'nordic', name: 'Deep Nordic', swatch: '#0f172a' }
+      ];
+      let selectedCategory = 'Semua';
+      let searchQuery = '';
+      let sortBy = 'pinned';
+
+      function esc(s) {
+        return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      }
+
+      function toast(msg) {
+        const c = document.getElementById('toast-container');
+        const el = document.createElement('div');
+        el.className = 'px-4 py-3 rounded-2xl border shadow-lg text-xs font-semibold flex items-center gap-2';
+        el.style.background = 'var(--modal-bg)';
+        el.style.borderColor = 'var(--card-border)';
+        el.innerHTML = '<span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">✓</span><span>' + esc(msg) + '</span>';
+        c.appendChild(el);
+        setTimeout(() => el.remove(), 2800);
+      }
+
+      function copyLink(url) {
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(url).then(() => toast('Tautan formulir berhasil disalin!'));
+        } else {
+          const t = document.createElement('textarea');
+          t.value = url;
+          document.body.appendChild(t);
+          t.select();
+          document.execCommand('copy');
+          document.body.removeChild(t);
+          toast('Tautan formulir berhasil disalin!');
+        }
+      }
+
+      function renderSwatches() {
+        const active = document.body.getAttribute('data-theme');
+        const box = document.getElementById('theme-swatches');
+        box.innerHTML = THEMES.map(t => '<button type="button" data-t="' + t.id + '" title="' + t.name + '" class="w-5 h-5 rounded-full cursor-pointer transition-transform ' + (active === t.id ? 'scale-110 ring-2 ring-sky-400' : 'opacity-75 hover:opacity-100') + '" style="background:' + t.swatch + '"></button>').join('');
+        box.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+          document.body.setAttribute('data-theme', b.getAttribute('data-t'));
+          renderSwatches();
+        }));
+      }
+
+      function renderPills() {
+        const counts = new Map();
+        DATA.forms.forEach(f => counts.set(f.category, (counts.get(f.category) || 0) + 1));
+        const cats = ['Semua', ...Array.from(counts.keys())];
+        const box = document.getElementById('category-pills');
+        box.innerHTML = cats.map(c => {
+          const count = c === 'Semua' ? DATA.forms.length : counts.get(c);
+          const act = selectedCategory === c;
+          return '<button type="button" data-cat="' + esc(c) + '" class="category-pill ' + (act ? 'active' : '') + ' px-3.5 py-1.5 rounded-full text-xs font-semibold cursor-pointer">' + esc(c) + ' (' + count + ')</button>';
+        }).join('');
+        box.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+          selectedCategory = b.getAttribute('data-cat');
+          renderPills();
+          renderGrid();
+        }));
+      }
+
+      function badge(status) {
+        if (status === 'Wajib') return '<span class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-sky-500/15 text-sky-600">Wajib</span>';
+        if (status === 'Segera Ditutup') return '<span class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-500/15 text-amber-700">Segera Ditutup</span>';
+        if (status === 'Nonaktif') return '<span class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-500/15 text-slate-500">Nonaktif</span>';
+        return '<span class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-500/15 text-emerald-700">Aktif</span>';
+      }
+
+      function renderGrid() {
+        const q = searchQuery.trim().toLowerCase();
+        let list = DATA.forms.filter(f => {
+          const okCat = selectedCategory === 'Semua' || f.category === selectedCategory;
+          if (!okCat) return false;
+          if (!q) return true;
+          return (f.title + ' ' + f.description + ' ' + f.category).toLowerCase().includes(q);
+        });
+        if (sortBy === 'az') {
+          list = [...list].sort((a, b) => a.title.localeCompare(b.title, 'id'));
+        } else {
+          list = [...list].sort((a, b) => (a.pinned === b.pinned ? 0 : a.pinned ? -1 : 1));
+        }
+
+        document.getElementById('results-counter').textContent = 'Menampilkan ' + list.length + ' dari ' + DATA.forms.length + ' formulir';
+        const grid = document.getElementById('forms-grid');
+        const empty = document.getElementById('empty-state');
+
+        if (!list.length) {
+          grid.innerHTML = '';
+          empty.classList.remove('hidden');
+          return;
+        }
+        empty.classList.add('hidden');
+
+        grid.innerHTML = list.map(f => `
+          <article class="form-card p-5 sm:p-6 flex flex-col justify-between ${f.status === 'Nonaktif' ? 'opacity-75' : ''}">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <div class="flex items-center gap-1.5 flex-wrap">
+                  <span class="px-2.5 py-1 rounded-lg text-[11px] font-semibold" style="background:var(--accent-soft);color:var(--accent-text)">${esc(f.category)}</span>
+                  ${f.pinned ? '<span class="px-2 py-1 rounded-lg text-[11px] font-semibold border" style="border-color:var(--accent-border);color:var(--accent-text)">📌 Tersemat</span>' : ''}
+                </div>
+                ${badge(f.status)}
+              </div>
+              <div class="flex items-start gap-3.5 mb-3">
+                <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-2xl shrink-0 border" style="background:var(--input-bg);border-color:var(--card-border)">${esc(f.icon || '📋')}</div>
+                <h3 class="font-display text-base font-bold leading-snug">${esc(f.title)}</h3>
+              </div>
+              <p class="text-xs sm:text-sm leading-relaxed mb-5" style="color:var(--text-secondary)">${esc(f.description)}</p>
+            </div>
+            <div class="pt-4 border-t" style="border-color:var(--card-border)">
+              <div class="flex items-center justify-between text-xs mb-3.5" style="color:var(--text-muted)">
+                <span>🕒 ${esc(f.duration || '± 3 menit')}</span>
+                <span>Google Form</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <a href="${esc(f.url)}" target="_blank" rel="noopener noreferrer" class="flex-1 py-2.5 px-3.5 rounded-xl text-xs sm:text-sm font-semibold btn-accent text-center">Buka Formulir ↗</a>
+                <button type="button" data-prev="${esc(f.id)}" class="py-2.5 px-3 rounded-xl text-xs font-semibold btn-soft cursor-pointer">Pratinjau</button>
+                <button type="button" data-copy="${esc(f.url)}" title="Salin Link" class="p-2.5 rounded-xl border cursor-pointer" style="border-color:var(--input-border)">📋</button>
+              </div>
+            </div>
+          </article>
+        `).join('');
+
+        grid.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', () => copyLink(b.getAttribute('data-copy'))));
+        grid.querySelectorAll('[data-prev]').forEach(b => b.addEventListener('click', () => {
+          const item = DATA.forms.find(x => x.id === b.getAttribute('data-prev'));
+          if (!item) return;
+          document.getElementById('preview-title').textContent = item.title;
+          document.getElementById('btn-preview-external').href = item.url;
+          let u = item.url;
+          if (u.includes('docs.google.com/forms') && !u.includes('embedded=true')) u += (u.includes('?') ? '&' : '?') + 'embedded=true';
+          document.getElementById('preview-iframe').src = u;
+          const m = document.getElementById('preview-modal');
+          m.classList.remove('hidden'); m.classList.add('flex');
+        }));
+      }
+
+      document.getElementById('search-input').addEventListener('input', e => {
+        searchQuery = e.target.value;
+        const clr = document.getElementById('btn-clear-search');
+        clr.classList.toggle('hidden', !searchQuery);
+        clr.classList.toggle('flex', Boolean(searchQuery));
+        renderGrid();
+      });
+      document.getElementById('btn-clear-search').addEventListener('click', () => {
+        searchQuery = '';
+        document.getElementById('search-input').value = '';
+        document.getElementById('btn-clear-search').classList.add('hidden');
+        renderGrid();
+      });
+      document.getElementById('sort-select').addEventListener('change', e => { sortBy = e.target.value; renderGrid(); });
+      document.getElementById('btn-reset-filter').addEventListener('click', () => {
+        selectedCategory = 'Semua'; searchQuery = '';
+        document.getElementById('search-input').value = '';
+        renderPills(); renderGrid();
+      });
+      document.getElementById('btn-close-preview').addEventListener('click', () => {
+        const m = document.getElementById('preview-modal');
+        m.classList.add('hidden'); m.classList.remove('flex');
+        document.getElementById('preview-iframe').src = 'about:blank';
+      });
+
+      renderSwatches();
+      renderPills();
+      renderGrid();
+    })();
+  </script>
+</body>
+</html>
